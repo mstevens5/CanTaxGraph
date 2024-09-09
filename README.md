@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -7,7 +6,8 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
 =======
+
 # CanTaxGraph
-Javascript React app for displaying line graphs displaying the amount of income tax paid per income in each Canadian province.
->>>>>>> cac64e2873043ff0b0635c9e725b2e21ed8f8b3a
+Javascript React app for generating line graphs displaying the amount of income tax paid per income in each Canadian province.
