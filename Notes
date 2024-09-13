@@ -1,0 +1,79 @@
+#######################################
+GENERAL DISCLAIMER:
+It is important to note that all calculations are made assuming a single (not married, etc) individual under the age of 65 working but not self-employed. The only tax credits that are applied are the Basic Personal Amount and the CPP Tax credit introduced in 2019. Nothing else is included (caregiver, dependent, etc) 
+
+########################################################
+CPP calculations:
+1.(Income - basic exemption amount) * contribution rate = contribution amount
+2. There is a maximum amount per year. You will not pay more than this
+3. Starting in 2019 there is a 15% nonrefundable tax credit on the amount contribution amount
+
+*** NOTE: starting in 2024 there is the CPP enhancement plan. It changes
+          things slightly, but not enough to affect contributions by much.
+          I have not included the details here.
+
+Example:
+Year: 2022
+Income: $60,000
+Contribution Amount = (60,000 - 3500) * 5.7% = 3220.5
+Tax Credit = 3220.5 * 15% = 483.075
+
+###################################################
+EI calculations
+1. Income * rate = employee premium
+2. There is a maximum amount each year.
+
+Quebec is different. They have there own rates and maximums
+
+
+######################################################
+Basic Personal Amount
+This is a nonrefundable tax credit.
+
+Federal Level
+1. BPA * lowest federal tax rate = Tax Credit 
+2. Essentially this means that you only start paying taxes once you start making
+more than BPA amount of income each year.
+3. Starting in 2020 BPA has changed slightly:
+    a. There is an upperbound and lowerbound BPA
+    b. The upperbound is applied to everyone that makes a yearly income up to
+        the amount of the fourth income tax bracket (the lower bound of this bracket)
+    c. The BPA amount is lowered evenly as your yearly income approaches the fifth
+        tax bracket, resulting in the lowerbound BPA.
+    Example Setup:
+        Year: 2020
+        BPA higher: 13229
+        BPA lower: 12298
+        Fourth income tax bracket: 150473 to 214368
+        Fifth income tax bracket: over 214368
+        BPA decrease amount (BPADA) per dollar between income of 150473 and 214368.
+            BPADA = (13229 - 12298) / (214368 - 150473)
+                  = 0.01457
+    Example 1:
+        Yearly Income: $80,0000    
+        BPA: 13229
+    Example 2:
+        Yearly Income: 250000
+        BPA: 12298
+    Example 3:
+        Yearly Income: 190000
+        BPA reduction = BPADA * (190000 - 150473)
+                      = 0.01457 * 39527
+                      = 575.9
+        BPA = 13229 - 575.9
+            = 12653.1
+
+0.01457
+
+2013: 11038
+2014: 11138
+2015: 11327
+2016: 11474
+2017: 11635
+2018: 11809
+2019: 12069
+2020: 13229 - 12298
+2021: 13808 - 12421
+2022: 14398 - 12719
+2023: 15000 - 13520
+2024: 15705 - 14156

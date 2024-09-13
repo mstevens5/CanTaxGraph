@@ -1,0 +1,398 @@
+{
+  "2013":{
+    "ei": {
+      "rate": 1.88,
+      "max_premium": 891.12
+    },
+    "cpp": {
+      "rate": 4.95,
+      "exemption": 3500,
+      "max_contrib": 3867.50
+    },
+    "personal_amount": 11038,
+    "rates": [
+      {
+        "rate": 15,
+        "min_bracket": 0
+      },
+      {
+        "rate": 22,
+        "min_bracket": 43561
+      },
+      {
+        "rate": 26,
+        "min_bracket": 87123
+      },
+      {
+        "rate": 29,
+        "min_bracket": 135054
+      }
+    ]
+  },
+  "2014":{
+    "ei": {
+      "rate": 1.88,
+      "max_premium": 913.68
+    },
+    "cpp": {
+      "rate": 4.95,
+      "exemption": 3500,
+      "max_contrib": 2425.50
+    },
+    "personal_amount": 11138,
+    "rates": [
+      {
+        "rate": 15,
+        "min_bracket": 0
+      },
+      {
+        "rate": 22,
+        "min_bracket": 43953
+      },
+      {
+        "rate": 26,
+        "min_bracket": 87907
+      },
+      {
+        "rate": 29,
+        "min_bracket": 136270
+      }
+    ]
+  },
+  "2015":{
+    "ei": {
+      "rate": 1.88,
+      "max_premium": 930.6
+    },
+    "cpp": {
+      "rate": 4.95,
+      "exemption": 3500,
+      "max_contrib": 2479.95
+    },
+    "personal_amount": 11327,
+    "rates": [
+      {
+        "rate": 15,
+        "min_bracket": 0
+      },
+      {
+        "rate": 22,
+        "min_bracket": 44701
+      },
+      {
+        "rate": 26,
+        "min_bracket": 89401
+      },
+      {
+        "rate": 29,
+        "min_bracket": 138586
+      }
+    ]
+  },
+  "2016":{
+    "ei": {
+      "rate": 1.88,
+      "max_premium": 955.04
+    },
+    "cpp": {
+      "rate": 4.95,
+      "exemption": 3500,
+      "max_contrib": 2544.30
+    },
+    "personal_amount": 11474,
+    "rates": [
+      {
+        "rate": 15,
+        "min_bracket": 0
+      },
+      {
+        "rate": 20.5,
+        "min_bracket": 45282
+      },
+      {
+        "rate": 26,
+        "min_bracket": 90563
+      },
+      {
+        "rate": 29,
+        "min_bracket": 140388
+      },
+      {
+        "rate": 33,
+        "min_bracket": 200000
+      }
+    ]
+  },
+  "2017":{
+    "ei": {
+      "rate": 1.63,
+      "max_premium": 836.19
+    },
+    "cpp": {
+      "rate": 4.95,
+      "exemption": 3500,
+      "max_contrib": 2564.10
+    },
+    "personal_amount": 11635,
+    "rates": [
+      {
+        "rate": 15,
+        "min_bracket": 0
+      },
+      {
+        "rate": 20.5,
+        "min_bracket": 45916
+      },
+      {
+        "rate": 26,
+        "min_bracket": 91831
+      },
+      {
+        "rate": 29,
+        "min_bracket": 142353
+      },
+      {
+        "rate": 33,
+        "min_bracket": 202800
+      }
+    ]
+  },
+  "2018":{
+    "ei": {
+      "rate": 1.66,
+      "max_premium": 858.22
+    },
+    "cpp": {
+      "rate": 4.95,
+      "exemption": 3500,
+      "max_contrib": 2593.80
+    },
+    "personal_amount": 11809,
+    "rates": [
+      {
+        "rate": 15,
+        "min_bracket": 0
+      },
+      {
+        "rate": 20.5,
+        "min_bracket": 46605
+      },
+      {
+        "rate": 26,
+        "min_bracket": 93208
+      },
+      {
+        "rate": 29,
+        "min_bracket": 144489
+      },
+      {
+        "rate": 33,
+        "min_bracket": 205842
+      }
+    ]
+  },
+  "2019":{
+    "ei": {
+      "rate": 1.62,
+      "max_premium": 860.22
+    },
+    "cpp": {
+      "rate": 5.1,
+      "exemption": 3500,
+      "max_contrib": 2748.90
+    },
+    "personal_amount": 12069,
+    "rates": [
+      {
+        "rate": 15,
+        "min_bracket": 0
+      },
+      {
+        "rate": 20.5,
+        "min_bracket": 47630
+      },
+      {
+        "rate": 26,
+        "min_bracket": 95259
+      },
+      {
+        "rate": 29,
+        "min_bracket": 147667
+      },
+      {
+        "rate": 33,
+        "min_bracket": 210371
+      }
+    ]
+  },
+  "2020":{
+    "ei": {
+      "rate": 1.58,
+      "max_premium": 856.36
+    },
+    "cpp": {
+      "rate": 5.25,
+      "exemption": 3500,
+      "max_contrib": 2898.00
+    },
+    "personal_amount": [12298, 13229],
+    "rates": [
+      {
+        "rate": 15,
+        "min_bracket": 0
+      },
+      {
+        "rate": 20.5,
+        "min_bracket": 48535
+      },
+      {
+        "rate": 26,
+        "min_bracket": 97069
+      },
+      {
+        "rate": 29,
+        "min_bracket": 150473
+      },
+      {
+        "rate": 33,
+        "min_bracket": 214368
+      }
+    ]
+  },
+  "2021":{
+    "ei": {
+      "rate": 1.58,
+      "max_premium": 889.54
+    },
+    "cpp": {
+      "rate": 5.45,
+      "exemption": 3500,
+      "max_contrib": 3166.45
+    },
+    "personal_amount": [12421, 13808],
+    "rates": [
+      {
+        "rate": 15,
+        "min_bracket": 0
+      },
+      {
+        "rate": 20.5,
+        "min_bracket": 49020
+      },
+      {
+        "rate": 26,
+        "min_bracket": 98040
+      },
+      {
+        "rate": 29,
+        "min_bracket": 151978
+      },
+      {
+        "rate": 33,
+        "min_bracket": 216511
+      }
+    ]
+  },
+  "2022":{
+    "ei": {
+      "rate": 1.58,
+      "max_premium": 952.74
+    },
+    "cpp": {
+      "rate": 5.7,
+      "exemption": 3500,
+      "max_contrib": 3499.80
+    },
+    "personal_amount": [12719, 14398],
+    "rates": [
+      {
+        "rate": 15,
+        "min_bracket": 0
+      },
+      {
+        "rate": 20.5,
+        "min_bracket": 50197
+      },
+      {
+        "rate": 26,
+        "min_bracket": 100392
+      },
+      {
+        "rate": 29,
+        "min_bracket": 155625
+      },
+      {
+        "rate": 33,
+        "min_bracket": 221708
+      }
+    ]
+  },
+  "2023":{
+    "ei": {
+      "rate": 1.63,
+      "max_premium": 1002.45
+    },
+    "cpp": {
+      "rate": 5.95,
+      "exemption": 3500,
+      "max_contrib": 3754.45
+    },
+    "personal_amount": [13520, 15000],
+    "rates": [
+      {
+        "rate": 15,
+        "min_bracket": 0
+      },
+      {
+        "rate": 20.5,
+        "min_bracket": 53359
+      },
+      {
+        "rate": 26,
+        "min_bracket": 106717
+      },
+      {
+        "rate": 29,
+        "min_bracket": 165430
+      },
+      {
+        "rate": 33,
+        "min_bracket": 235675
+      }
+    ]
+  },
+  "2024":{
+    "ei": {
+      "rate": 1.66,
+      "max_premium": 1049.12
+    },
+    "cpp": {
+      "rate": 5.95,
+      "exemption": 3500,
+      "max_contrib": 3867.50
+    },
+    "personal_amount": [14156, 15705],
+    "rates": [
+      {
+        "rate": 15,
+        "min_bracket": 0
+      },
+      {
+        "rate": 20.5,
+        "min_bracket": 55867
+      },
+      {
+        "rate": 26,
+        "min_bracket": 111733
+      },
+      {
+        "rate": 29,
+        "min_bracket": 173205
+      },
+      {
+        "rate": 33,
+        "min_bracket": 246752
+      }
+    ]
+  }
+}
