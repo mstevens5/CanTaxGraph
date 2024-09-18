@@ -1,6 +1,6 @@
 {
   "2013": {
-    "personalAmount": 17593,
+    "personal_amount": 17593,
     "rates": [
       {
         "rate": 10,
@@ -9,7 +9,7 @@
     ]
   },
   "2014": {
-    "personalAmount": 17787,
+    "personal_amount": 17787,
     "rates": [
       {
         "rate": 10,
@@ -18,7 +18,7 @@
     ]
   },
   "2015": {
-    "personalAmount": 18214,
+    "personal_amount": 18214,
     "rates": [
       {
         "rate": 10,
@@ -43,7 +43,7 @@
     ]
   },
   "2016": {
-    "personalAmount": 18451,
+    "personal_amount": 18451,
     "rates": [
       {
         "rate": 10,
@@ -68,7 +68,7 @@
     ]
   },
   "2017": {
-    "personalAmount": 18690,
+    "personal_amount": 18690,
     "rates": [
       {
         "rate": 10,
@@ -93,7 +93,7 @@
     ]
   },
   "2018": {
-    "personalAmount": 18915,
+    "personal_amount": 18915,
     "rates": [
       {
         "rate": 10,
@@ -118,7 +118,7 @@
     ]
   },
   "2019": {
-    "personalAmount": 19369,
+    "personal_amount": 19369,
     "rates": [
       {
         "rate": 10,
@@ -143,7 +143,7 @@
     ]
   },
   "2020": {
-    "personalAmount": 19369,
+    "personal_amount": 19369,
     "rates": [
       {
         "rate": 10,
@@ -168,7 +168,7 @@
     ]
   },
   "2021": {
-    "personalAmount": 19369,
+    "personal_amount": 19369,
     "rates": [
       {
         "rate": 10,
@@ -193,7 +193,7 @@
     ]
   },
   "2022": {
-    "personalAmount": 19814,
+    "personal_amount": 19814,
     "rates": [
       {
         "rate": 10,
@@ -218,7 +218,7 @@
     ]
   },
   "2023": {
-    "personalAmount": 21003,
+    "personal_amount": 21003,
     "rates": [
       {
         "rate": 10,
@@ -243,7 +243,7 @@
     ]
   },
   "2024": {
-    "personalAmount": 21885,
+    "personal_amount": 21885,
     "rates": [
       {
         "rate": 10,

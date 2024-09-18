@@ -1,5 +1,5 @@
-import ab_data from "./ab.json"
-import fed from "./federal.json"
+import ab_data from "./tax_data/ab.json" with { type: "json"}
+import fed from "./tax_data/federal.json" with { type: "json"};
 
 
 export const fed_data = fed

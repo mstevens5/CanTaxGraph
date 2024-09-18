@@ -6,5 +6,10 @@ export default defineConfig({
   plugins: [react()],
   build: {
     commonjsOptions: { transformMixedEsModules: true }
+  },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './testSetup.js'
   }
 })
