@@ -12,32 +12,84 @@ function round_to(val, digits){
 }
 
 /**
+ * Get all the plottable data!
+ * 
+ * @param {string} year: Tax year 
+ * @param {Number} income: Taxable income for the year
+ * @param {string} prov: Two digit provincial code capitalized ("AB", etc) 
+ * @returns {object}
+ * @returns {object} Twelve properties: Each property is an array of objects 
+ *                   containing x and y properties}. Twleve property names:
+ *                    'federal_income_tax',
+ *                    'federal_income_tax_percentage',
+ *                    'cpp',
+ *                    'cpp_percentage', 
+ *                    'prov_income_tax', 
+ *                    'prov_income_tax_percentage',
+ *                    'total_income_tax', 
+ *                    'total_income_tax_percentage',
+ *                    'total_tax',
+ *                    'total_tax_percentage'
+ */
+const get_tax_data = (year, income, prov, x_interval) => {
+  const fed_plots = _get_fed_plots(year, income, x_interval)
+  const prov_plots = _get_prov_plots(year, income, prov, x_interval)
+
+  let total_tax = []
+  let total_tax_percentage = []
+  let total_income_tax = []
+  let total_income_tax_percentage = []
+  let i = 0
+  for (let x = 0; x <= income; x += x_interval, i++){
+    let t_i_t = fed_plots.fed_income_tax[i]['y'] + prov_plots.prov_income_tax[i]['y']
+    t_i_t = round_to(t_i_t, 2)
+    let t_t = t_i_t + fed_plots.cpp[i]['y'] + fed_plots.ei[i]['y']
+    t_t = round_to(t_t, 2)
+    total_income_tax.push({'x':x, 'y': t_i_t})
+    total_income_tax_percentage.push({'x': x, 'y': Math.round(10000 * t_i_t / x) / 100})
+    total_tax.push({'x':x, 'y': t_t})
+    total_tax_percentage.push({'x': x, 'y': Math.round(10000 * t_t / x) / 100})
+  }
+
+  return {...fed_plots, 
+    ...prov_plots, 
+    total_income_tax, 
+    total_income_tax_percentage, 
+    total_tax,
+    total_tax_percentage
+  }
+}
+
+/**
  * Calculate all federal plottable tax data returned as arrays of objects
  * containing x and y properties.
  * 
  * @param {string} year: Tax year
  * @param {Number} income: Taxable Income for the year 
  * @returns {object} Four properties: 
- *                  'income_tax' {Array of objects contained x and y properties}
- *                  'percentage' {Array of objects contained x and y properties}
- *                  'cpp' {Array of objects contained x and y properties}
- *                  'cpp_percentage' {Array of objects contained x and y 
- *                                   properties}
+ *   'fed_income_tax' {Array of objects contained x and y properties}
+ *   'fed_income_tax_percentage' {Array of objects contained x and y properties}
+ *   'cpp' {Array of objects contained x and y properties}
+ *   'cpp_percentage' {Array of objects contained x and y properties}
  */
-const get_fed_data = (year, income) => {
-  let income_tax = []
-  let percentage = []
+const _get_fed_plots = (year, income, x_interval) => {
+  let fed_income_tax = []
+  let fed_income_tax_percentage = []
   let cpp = []
   let cpp_percentage = []
-  for (let i = 0; i < income; i += 5000){
+  let ei = []
+  let ei_percentage = []
+  for (let i = 0; i <= income; i += x_interval){
     let inc_tax = round_to(calc_fed_income_tax(year, i) - calc_fed_bpa_credit(year, i),2)
     inc_tax = inc_tax > 0 ? inc_tax : 0
-    income_tax.push({'x': i, 'y': inc_tax})
+    fed_income_tax.push({'x': i, 'y': inc_tax})
     cpp.push({'x': i, 'y': calc_fed_cpp(year, i)})
+    ei.push({'x': i, 'y': calc_fed_ei(year, i)})
+    ei_percentage.push({'x': i, 'y': Math.round(10000 * calc_fed_ei(year, i) / i) / 100})
     cpp_percentage.push({'x': i, 'y': Math.round(10000 * calc_fed_cpp(year, i) / i) / 100})
-    percentage.push({'x': i, 'y': Math.round(10000 * calc_fed_income_tax(year, i) / i) / 100})
+    fed_income_tax_percentage.push({'x': i, 'y': Math.round(10000 * inc_tax / i) / 100})
   }
-  return {income_tax, percentage, cpp, cpp_percentage}
+  return {fed_income_tax, fed_income_tax_percentage, cpp, cpp_percentage, ei, ei_percentage}
 }
 
 /**
@@ -47,22 +99,21 @@ const get_fed_data = (year, income) => {
  * @param {string} year: Tax year
  * @param {Number} income: Taxable Income for the year 
  * @param {string} prov: Two digit provincial code capitalized ("AB", etc)
- * @returns {object} Four properties: 
- *                  'income_tax' {Array of objects contained x and y properties}
- *                  'percentage' {Array of objects contained x and y properties}
+ * @returns {object} Two properties: 
+ *  'prov_income_tax' {Array of objects contained x and y properties}
+ *  'prov_income_tax_percentage' {Array of objects contained x and y properties}
  */
-const get_prov_data = (year, income, prov) => {
-  let income_tax = []
-  let percentage = []
-  let cpp = []
-  let cpp_percentage = []
-  for (let i = 0; i < income; i += 5000){
+const _get_prov_plots = (year, income, prov, x_interval) => {
+  let prov_income_tax = []
+  let prov_income_tax_percentage = []
+  const x_inc = income / 16
+  for (let i = 0; i <= income; i += x_interval){
     let inc_tax = round_to(calc_prov_income_tax(year, i, prov) - calc_prov_bpa_credit(year, i, prov),2)
     inc_tax = inc_tax > 0 ? inc_tax : 0
-    income_tax.push({'x': i, 'y': inc_tax})
-    percentage.push({'x': i, 'y': Math.round(10000 * calc_prov_income_tax(year, i, prov) / i) / 100})
+    prov_income_tax.push({'x': i, 'y': inc_tax})
+    prov_income_tax_percentage.push({'x': i, 'y': Math.round(10000 * inc_tax / i) / 100})
   }
-  return {income_tax, percentage}
+  return {prov_income_tax, prov_income_tax_percentage}
 }
 
 
@@ -265,7 +316,7 @@ export default {
   calc_prov_bpa_credit,
   calc_fed_ei, 
   calc_fed_cpp,
-  get_fed_data,
-  get_prov_data,
+  get_tax_data,
+  round_to,
   errors
 }

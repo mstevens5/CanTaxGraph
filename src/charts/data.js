@@ -1,10 +1,16 @@
-let unit_m = "%"
+var unit_m = "$"
 let colors = ["#000000", //black
   "#ff00ff", // blue
   "#00bfff", // deepskyblue
   "darkgreen", // dodgerblue
   "#ffa500", // orange
-  "red"] // darkcyan 
+  "red"
+] // darkcyan 
+
+const new_options = (unit="$") => {
+  unit_m = unit
+  return Object.create(options)
+}
 
 const options = {
   theme: 'light2',
@@ -17,13 +23,19 @@ const options = {
         return b.dataPoint.y - a.dataPoint.y;
       });
 
-      content	+= e.entries[0].dataPoint.label;
+      content += "<div style=\"text-align: center\">";
+      content += "<h3 style=\"margin: 0\">"
+      content	+= "<span style=\"font-weight: bold\"> Income: $" + e.entries[0].dataPoint.x.toLocaleString() + "</span>";
       content += "<br/>";
+      content += "</h3>"
+      content += "</div>";
+      content += "<hr>"
 
       var entries = e.entries;
       for(var j = 0; j < entries.length; j++) {
-        content	+= "<span style=\"color:" + entries[j].dataSeries.color+"\"\>" + entries[j].dataSeries.name + " </span>: " + "<strong>" + entries[j].dataPoint.y + "</strong>";
-        content += "<br/>"; 
+        content	+= "<div style=\"text-align:right\">";
+        content	+= "<span style=\"color:" + entries[j].dataSeries.color+"\"\>" + entries[j].dataSeries.name + " </span>: " + "<strong>" + unit_m + Number(entries[j].dataPoint.y.toFixed(2)).toLocaleString() + "</strong>";
+        content += "<br/></div>"; 
       } 
       return content;
 
@@ -39,8 +51,14 @@ const options = {
       color: "orange",
       labelFontColor: "#F8F8F8"
     },
+    labelFontWeight: "bold",
+    interlacedColor: "#f8f8f8",
     title: "Tax Amount",
-    //valueFormatString:"0'%'"
+    minimum: 0,
+    labelFormatter: function(e){
+      return unit_m + e.value.toLocaleString()
+    },
+    //valueFormatString:"'$'0"
   },
   axisX : {
     crosshair: {
@@ -49,7 +67,9 @@ const options = {
       labelFontColor: "white"
     },
     title: "Income",
+    gridThickness: 1,
     minimum: 0
+    //maximum: 0
   },
   legend: {
     cursor: "pointer",
@@ -89,30 +109,28 @@ const options = {
     {
       type: 'line',
       //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
-      name: "Federal Income Tax",
+      name: "Total Income Tax",
       lineDashType: "line",
       showInLegend: true,
       color: colors[1],
       markerType: "circle",
       //markerColor: "blue",
+      visible: false,
       dataPoints: [
       ],
     },
     {
       type: 'line',
       //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
-      name: "Total Income Tax",
+      name: "Federal Income Tax",
       lineDashType: "line",
       showInLegend: true,
       color: colors[2],
       markerType: "circle",
       //markerColor: "Brown",
+      visible: false,
+      showInLegend: true,
       dataPoints: [
-          {"x": 60000, "y":8000},
-          {"x": 65000, "y":8200},
-          {"x": 70000, "y":8500},
-          {"x": 75000, "y":8500},
-          {"x": 80000, "y":8600}
       ],
     },
     {
@@ -124,12 +142,8 @@ const options = {
       color: colors[3],
       markerType: "circle",
       //markerColor: "red",
+      visible: false,
       dataPoints: [
-          {"x": 60000, "y":5000},
-          {"x": 65000, "y":5200},
-          {"x": 70000, "y":5500},
-          {"x": 75000, "y":5500},
-          {"x": 80000, "y":5500}
       ],
     },
     {
@@ -141,12 +155,8 @@ const options = {
       color: colors[4],
       markerType: "circle",
       //markerColor: "Brown",
+      visible: false,
       dataPoints: [
-          {"x": 60000, "y":6000},
-          {"x": 65000, "y":6200},
-          {"x": 70000, "y":6500},
-          {"x": 75000, "y":6500},
-          {"x": 80000, "y":6600}
       ],
     },
     {
@@ -157,15 +167,89 @@ const options = {
       showInLegend: true,
       markerType: "circle",
       color: colors[5],
+      visible: false,
       dataPoints: [
-          {"x": 60000, "y":7000},
-          {"x": 65000, "y":7200},
-          {"x": 70000, "y":7500},
-          {"x": 75000, "y":7500},
-          {"x": 80000, "y":7600}
+      ],
+    },
+    {
+      type: 'line',
+      //toolTipContent: "{x}: {y} <span style='\"'color: {color}; font-weight: bold;'\";'>{name} </span>",
+      name: "Total Tax",
+      lineDashType: "dot",
+      showInLegend: true,
+      color: colors[0],
+      //markerColor: "black",
+      dataPoints: [
+      ],
+    },
+    {
+      type: 'line',
+      //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
+      name: "Total Income Tax",
+      lineDashType: "dot",
+      showInLegend: true,
+      color: colors[1],
+      markerType: "circle",
+      //markerColor: "blue",
+      visible: false,
+      dataPoints: [
+      ],
+    },
+    {
+      type: 'line',
+      //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
+      name: "Federal Income Tax",
+      lineDashType: "dot",
+      showInLegend: true,
+      color: colors[2],
+      markerType: "circle",
+      //markerColor: "Brown",
+      visible: false,
+      showInLegend: true,
+      dataPoints: [
+      ],
+    },
+    {
+      type: 'line',
+      //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
+      name: "Provincial Income Tax",
+      lineDashType: "dot",
+      showInLegend: true,
+      color: colors[3],
+      markerType: "circle",
+      //markerColor: "red",
+      visible: false,
+      dataPoints: [
+      ],
+    },
+    {
+      type: 'line',
+      //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
+      name: "CPP Contributions",
+      lineDashType: "dot",
+      showInLegend: true,
+      color: colors[4],
+      markerType: "circle",
+      //markerColor: "Brown",
+      visible: false,
+      dataPoints: [
+      ],
+    },
+    {
+      type: 'line',
+      //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
+      name: "Ei Premium",
+      lineDashType: "dot",
+      showInLegend: true,
+      markerType: "circle",
+      color: colors[5],
+      visible: false,
+      dataPoints: [
+        {x:30000,y:4000},
+        {x:35000,y:4000}
       ],
     }
   ]
 };
 
-export default options
+export default {new_options}

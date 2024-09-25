@@ -1,6 +1,6 @@
 #######################################
 GENERAL DISCLAIMER:
-It is important to note that all calculations are made assuming a single (not married, etc) individual under the age of 65 working but not self-employed. The only tax credits that are applied are the Basic Personal Amount and the CPP Tax credit introduced in 2019. Nothing else is included (caregiver, dependent, etc) 
+It is important to note that all calculations are made assuming a single (not married, etc) individual under the age of 65 working but not self-employed. The only tax credits that are applied are the Basic Personal Amount and the CPP Tax credit introduced in 2019. Nothing else is included (caregiver, dependent, employment amount tax credit, etc) 
 
 ########################################################
 CPP calculations:
@@ -77,3 +77,4 @@ more than BPA amount of income each year.
 2022: 14398 - 12719
 2023: 15000 - 13520
 2024: 15705 - 14156
+
