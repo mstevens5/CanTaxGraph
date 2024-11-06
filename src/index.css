@@ -2,14 +2,18 @@
     margin-right: 5px;
 }
 
-.plot_info {
+.base {
     max-width: 80rem;
     margin-left: auto;
     margin-right: auto;
 }
 
+.plot_info {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .plot {
-    max-width: 80rem;
     margin-left: auto;
     margin-right: auto;
 }

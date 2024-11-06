@@ -1,33 +1,62 @@
 import {createSlice} from '@reduxjs/toolkit'
 
-const initialState = {
+const initial_params = {
+  chart_key: "truetruetruetruetruetrue",
   primary : {
-    income: 100000,
+    income: 50000,
     prov: 'AB',
+    year: '2013',
     use_ratio: false,
     is_plotted: true
   },
   secondary : {
-    income: 50000,
-    prov: 'AB',
-    use_ratio: false,
-    is_plotted: false
+    //income2: 50000,
+    prov2: 'AB',
+    year2: '2013',
+    //use_ratio2: false,
+    //is_plotted2: false
+  },
+  use_ratio: false,
+  enable_second_plot: false,
+  display_options: {
+    total_tax: true,
+    total_income_tax: true,
+    fed_income_tax: true,
+    prov_income_tax: true,
+    cpp: true,
+    ei: true
   }
 }
 
-const plot_options_slice = createSlice({
-  name: "plot_options"
-})
-
 const plot_params_slice = createSlice({
   name: "plot_params",
-  initialState,
+  initialState: initial_params,
   reducers: {
     set_primary_params(state, action){
-      state.primary = {...action.payload}
+      console.log('====== action.payload', action.payload)
+      Object.keys(action.payload)
+        .filter(key => key in state.primary)
+        .forEach((key) => state.primary[key] = action.payload[key])
     },
     set_secondary_params(state, action){
-      state.secondary = {...action.payload}
+      console.log('====== action222.payload', action.payload)
+      Object.keys(action.payload)
+        .filter(key => key in state.secondary)
+        .forEach((key) => state.secondary[key] = action.payload[key])
+    },
+    set_use_ratio(state, action){
+      state.use_ratio = action.payload
+    },
+    set_enable_second_plot(state, action){
+      state.enable_second_plot = action.payload
+    },
+    set_display_options(state, action){
+      console.log('====== action.payload', action.payload)
+      Object.keys(action.payload)
+        .filter(key => key in state.display_options)
+        .forEach((key) => state.display_options[key] = action.payload[key])
+      state.chart_key = set_chart_key(state.display_options)
+      console.log(' . state is ', state.chart_key)
     }
     /*
     set_primary_income(state, action) {
@@ -64,9 +93,23 @@ const plot_params_slice = createSlice({
   }
 })
 
+const set_chart_key = (display_options) => {
+  let d = display_options
+  let key = d.total_tax + '' +
+    d.total_income_tax + '' + 
+    d.fed_income_tax + '' +
+    d.prov_income_tax + '' +
+    d.cpp + '' +
+    d.ei;
+  return key
+}
+
 export const {
   set_primary_params, 
-  set_secondary_params
+  set_secondary_params,
+  set_use_ratio,
+  set_enable_second_plot,
+  set_display_options
 } = plot_params_slice.actions
 
 export default plot_params_slice.reducer

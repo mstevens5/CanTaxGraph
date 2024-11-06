@@ -8,7 +8,10 @@ const errors = {
 }
 
 function round_to(val, digits){
-  return Math.round(( val + Number.EPSILON) * 10**digits) / 100
+  if (digits < 0){
+    return val
+  }
+  return Math.round(( val + Number.EPSILON) * 10**digits) / 10**digits
 }
 
 /**
@@ -32,6 +35,9 @@ function round_to(val, digits){
  *                    'total_tax_percentage'
  */
 const get_tax_data = (year, income, prov, x_interval) => {
+  if (income <= 0){
+    return {}
+  }
   const fed_plots = _get_fed_plots(year, income, x_interval)
   const prov_plots = _get_prov_plots(year, income, prov, x_interval)
 
@@ -42,13 +48,13 @@ const get_tax_data = (year, income, prov, x_interval) => {
   let i = 0
   for (let x = 0; x <= income; x += x_interval, i++){
     let t_i_t = fed_plots.fed_income_tax[i]['y'] + prov_plots.prov_income_tax[i]['y']
-    t_i_t = round_to(t_i_t, 2)
+    //t_i_t = round_to(t_i_t, 2)
     let t_t = t_i_t + fed_plots.cpp[i]['y'] + fed_plots.ei[i]['y']
-    t_t = round_to(t_t, 2)
+    //t_t = round_to(t_t, 2)
     total_income_tax.push({'x':x, 'y': t_i_t})
-    total_income_tax_percentage.push({'x': x, 'y': Math.round(10000 * t_i_t / x) / 100})
+    total_income_tax_percentage.push({'x': x, 'y': round_to(100 * t_i_t / x, 2)})
     total_tax.push({'x':x, 'y': t_t})
-    total_tax_percentage.push({'x': x, 'y': Math.round(10000 * t_t / x) / 100})
+    total_tax_percentage.push({'x': x, 'y': round_to(100 * t_t / x, 2)})
   }
 
   return {...fed_plots, 
@@ -59,6 +65,8 @@ const get_tax_data = (year, income, prov, x_interval) => {
     total_tax_percentage
   }
 }
+// Total tax: 4369.25 17.48
+// Total Income Tax: 2835 11.34
 
 /**
  * Calculate all federal plottable tax data returned as arrays of objects
@@ -80,17 +88,20 @@ const _get_fed_plots = (year, income, x_interval) => {
   let ei = []
   let ei_percentage = []
   for (let i = 0; i <= income; i += x_interval){
-    let inc_tax = round_to(calc_fed_income_tax(year, i) - calc_fed_bpa_credit(year, i),2)
+    let inc_tax = calc_fed_income_tax(year, i) - calc_fed_bpa_credit(year, i)
     inc_tax = inc_tax > 0 ? inc_tax : 0
-    fed_income_tax.push({'x': i, 'y': inc_tax})
+    fed_income_tax.push({'x': i, 'y': round_to(inc_tax,2)})
     cpp.push({'x': i, 'y': calc_fed_cpp(year, i)})
     ei.push({'x': i, 'y': calc_fed_ei(year, i)})
-    ei_percentage.push({'x': i, 'y': Math.round(10000 * calc_fed_ei(year, i) / i) / 100})
-    cpp_percentage.push({'x': i, 'y': Math.round(10000 * calc_fed_cpp(year, i) / i) / 100})
-    fed_income_tax_percentage.push({'x': i, 'y': Math.round(10000 * inc_tax / i) / 100})
+    ei_percentage.push({'x': i, 'y': round_to(100 * calc_fed_ei(year, i) / i, 2) })
+    cpp_percentage.push({'x': i, 'y': round_to(100 * calc_fed_cpp(year, i) / i, 2) })
+    fed_income_tax_percentage.push({'x': i, 'y': round_to(100 * inc_tax / i, 2) })
   }
   return {fed_income_tax, fed_income_tax_percentage, cpp, cpp_percentage, ei, ei_percentage}
 }
+// fed 2094.3 8.38
+// cpp 1064.25 4.26
+// ei 470 1.88
 
 /**
  * Calculate all provincial plottable tax data (for given province), 
@@ -108,14 +119,14 @@ const _get_prov_plots = (year, income, prov, x_interval) => {
   let prov_income_tax_percentage = []
   const x_inc = income / 16
   for (let i = 0; i <= income; i += x_interval){
-    let inc_tax = round_to(calc_prov_income_tax(year, i, prov) - calc_prov_bpa_credit(year, i, prov),2)
+    let inc_tax = calc_prov_income_tax(year, i, prov) - calc_prov_bpa_credit(year, i, prov)
     inc_tax = inc_tax > 0 ? inc_tax : 0
-    prov_income_tax.push({'x': i, 'y': inc_tax})
-    prov_income_tax_percentage.push({'x': i, 'y': Math.round(10000 * inc_tax / i) / 100})
+    prov_income_tax.push({'x': i, 'y': round_to(inc_tax,2)})
+    prov_income_tax_percentage.push({'x': i, 'y': round_to(100 * inc_tax / i, 4)})
   }
   return {prov_income_tax, prov_income_tax_percentage}
 }
-
+// $25000, 740.7, 2.96
 
 /** 
  * Standard marginal progressive tax calculation. The amount of income in each
@@ -156,7 +167,6 @@ const _calc_basic_income_tax = (rate_info, income) => {
 
   // Total taxes owed (for all tax brackets combined)
   let tax_amnt = taxes.reduce((accum, cur) => accum + cur, 0)
-  //tax_amnt = tax_amnt - calc_bpa_credit(year,income)
   tax_amnt = round_to(tax_amnt, 2)
   return (tax_amnt < 0) ? 0: tax_amnt
 
