@@ -1,11 +1,197 @@
+body{
+    font-family:Roboto;
+    background-color: #e0e0e0;
+}
+
+.income_outline{
+    box-shadow: 10px 10px 40px #00000033;
+    border-radius:10px;
+    padding:1rem;
+    text-align:center; 
+    background-color: white;
+}
+
+/* Title and Description*/
+.title_container{
+    display:flex;
+    margin:auto;
+    max-width: 600px;
+    justify-content:center;
+    align-items:center;
+    flex-flow: column wrap;
+    text-align:center;
+}
+.title{
+    font-size:3.75rem;
+    color:#484848;
+}
+.title_description{
+    color:#484848;
+    font-style:italic;
+    font-size:1rem;
+}
+.title_rule{
+    width:90%;
+}
+
+.select {
+    height:2rem;
+    margin-bottom:1rem;
+}
+
+.plot_records{
+    /*border: 2px solid #bbbbbb;*/
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:50px;
+   /* padding:40px;*/
+   /* display:grid*/
+}
+@media only screen and (min-width: 800px) {
+    .plot_records{
+        width:80%;
+        max-width: 1000px;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .plot_records{
+        max-width:100%;
+        width:100%;
+    }
+}
+.plot_param_container{
+    display:flex;
+    flex-wrap: nowrap;
+    margin-top:20px;
+    margin-bottom:20px;
+    align-items: stretch;
+}
+@media only screen and (min-width: 600px) {
+    .plot_param_container{
+        /*grid-template-columns: 1fr 1fr;*/
+        flex-direction: row;
+        justify-content:space-around;
+        align-items: stretch;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .plot_param_container{
+        /*grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;*/
+        flex-direction: column
+    }
+}
+.plot_params{
+    box-shadow: 10px 10px 40px #00000033;
+    border-radius:10px;
+    padding:1rem;
+    background-color: white;
+
+}
+@media only screen and (min-width: 600px){
+    .plot_params {
+        width:45%;
+    }
+}
+@media only screen and (max-width: 600px){
+    .plot_params {
+        width:90%;
+        margin:5px;
+    }
+}
+.plot_param_label{
+    font-size:1rem;
+    font-weight:bolder;
+    padding-right:10px;
+}
+.plot_param_title{
+    font-size:1.25rem;
+    text-align:center;
+    color:#111111;
+    font-weight:900;
+}
+.plot_param_title_description{
+    color:#484848;
+    font-style:italic;
+    font-size:0.9rem;
+}
+
+.display_options_outline{
+    box-shadow: 10px 10px 40px #00000033;
+    border-radius:10px;
+    padding:1rem;
+    background-color: white;
+}
+.display_options_container{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.line_display_option{
+    flex-basis:33%;
+    flex-shrink:0;
+    white-space: nowrap;
+}
+.display_options_title{
+    font-size:1.25rem;
+    text-align:center;
+    color:#111111;
+    font-weight:900;
+}
+.ratio_description{
+    color:#484848;
+    font-style:italic;
+    font-size:0.9rem;
+}
+
+.plot{
+    box-shadow: 10px 10px 40px #00000011;
+    border: 1px solid black;
+}
+
+.calculation_description_outline{
+    /*border: 2px solid #bbbbbb;*/
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:50px;
+    margin-top:50px;
+    box-shadow: 10px 10px 40px #00000033;
+    border-radius:10px;
+    padding:1rem;
+    background-color: white;
+}
+@media only screen and (min-width: 800px) {
+    .calculation_description_outline{
+        width:80%;
+        max-width: 1000px;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .calculation_description_outline{
+        max-width:100%;
+        width:100%;
+    }
+}
+
+
+
+
 .plot_option {
     margin-right: 5px;
 }
 
 .base {
-    max-width: 80rem;
     margin-left: auto;
     margin-right: auto;
+    max-width: 70rem;
+}
+.yant{
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    grid-template-columns: 1fr;
+    border-radius: 2.19rem;
+    box-shadow: 0 10px 40px #0000001a;
+    padding:25px;
 }
 
 .plot_info {
@@ -13,7 +199,17 @@
     margin-right: auto;
 }
 
-.plot {
-    margin-left: auto;
-    margin-right: auto;
+.legend_plot {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+
+.ResultGrid {
+    width: 50rem;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    grid-template-columns: 1fr;
+    border-radius: 2.19rem;
+    box-shadow: 0 10px 40px #0000001a;
 }

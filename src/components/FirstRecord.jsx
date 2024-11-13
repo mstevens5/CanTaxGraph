@@ -3,6 +3,9 @@ import { useDispatch, useSelector} from 'react-redux'
 import { set_primary_params, 
   set_secondary_params, 
   set_use_ratio} from '../reducers/plot_params'
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import {FormControl, OutlinedInput} from '@mui/material'
 
 const FirstRecord = ({years, provinces}) => {
   const dispatch = useDispatch()
@@ -34,22 +37,29 @@ const FirstRecord = ({years, provinces}) => {
   }
 
   return (
-    <div> 
+    <div > 
       <form onSubmit={handleSubmit}>
-        <fieldset className="plot_info">
-          <legend> First Plot</legend>
+        {/*
           <label>
             Max Income:
+            <br />
             <input className="plot_option" value={income}
               onChange={change_income} />
           </label>
-          <select className='plot_option' onChange={change_year} value={year}>
-            {years.map((year) => <option key={year}>{year}</option>)}
-          </select>
-          <select className='plot_option' onChange={change_prov} value={prov}>
-            {provinces.map((prov) => <option key={prov}>{prov}</option>)}
-          </select>
-        </fieldset>
+        */}
+        <div className="plot_param_title"> Primary Plot</div>
+          <hr className="title_rule"/>
+          <br />
+          <span className="plot_param_label">Tax Year:</span> 
+          <Select size="small" onChange={change_year} value={year} >
+            {years.map((year) => <MenuItem key={year} value={year}>{year}</MenuItem>)}
+          </Select>
+          <br />
+          <br />
+          <span className="plot_param_label">Province:</span> 
+          <Select size="small" onChange={change_prov} value={prov} >
+            {provinces.map((prov) => <MenuItem key={prov} value={prov}>{prov}</MenuItem>)}
+          </Select>
       </form>
     </div>
   )

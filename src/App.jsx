@@ -6,18 +6,22 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 import chart_data from "./charts/data" 
 import {provinces, years} from "./taxes/init"
 import PlotRecords from "./components/PlotRecords"
+import CalculationDescription from "./components/CalculationDescription";
 import { set_primary_params } from './reducers/plot_params';
+
+import {FormGroup, FormControlLabel, Switch} from '@mui/material'
 
 function App() {
   /*const [year, setYear] = useState('2013')
   const [prov, setProvince] = useState(provinces[0])
   const [salary, setSalary] = useState(100000)
   const [checked, setChecked] = useState(false)*/
-  const [options, setOptions] = useState(chart_data.new_options())
+  const [options, setOptions] = useState(chart_data.options)
+  const [switch_checked, set_checked] = useState(false); 
   const dispatch = useDispatch()
-  const chart_key = useSelector(({plot_params}) => {
-    return plot_params.chart_key
-  })
+  //const chart_key = useSelector(({plot_params}) => {
+  //  return plot_params.chart_key
+  //})
   /*
   const display_options = useSelector(({plot_params}) => {
     return plot_params.display_options
@@ -44,16 +48,26 @@ function App() {
     console.log('Inside CheckChange')
     setChecked(!checked)
   }*/
+  console.log('Inside APP before return')
   return (
-    <div className='base'>
+    <div >
+      <div className="title_container">
+        <div className="title"> Canadian Tax Graph</div>
+        <div className="title_description"> 
+          More than a calculator, Canadian Tax Graph displays basic tax 
+          information in an easy to view and compare line chart.
+        </div>
+        <hr className="title_rule"/>
+      </div>
       <PlotRecords years={years} 
         provinces={provinces}
         set_options = {setOptions}
         />
       <div className="plot">
         {console.log('plots before', options)}
-        <CanvasJSChart options={options} key={chart_key} />
+        <CanvasJSChart options={options} />
       </div>
+      <CalculationDescription/>
     </div>
   );
 }

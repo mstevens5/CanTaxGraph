@@ -5,11 +5,17 @@ import { set_primary_params,
   set_secondary_params, 
   set_use_ratio} from '../reducers/plot_params'
 import {load_primary_chart_data} from "../charts/data" 
+import chart_data from "../charts/data" 
 import FirstRecord from "./FirstRecord"
 import SecondRecord from "./SecondRecord"
 import DisplayOptions from "./DisplayOptions"
+import Income from "./Income"
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import {TabContext, TabList, TabPanel} from '@mui/lab';
 
 function _PlotRecords({ years, provinces, set_options}){
+  const [value, setValue] = useState('1');
   const dispatch = useDispatch()
 
   const {income, prov, year } = useSelector(({plot_params}) => {
@@ -24,20 +30,31 @@ function _PlotRecords({ years, provinces, set_options}){
   const enable_plot = useSelector(({plot_params}) => {
     return plot_params.enable_second_plot
   })
-  const chart_key = useSelector(({plot_params}) => {
-    return plot_params.chart_key
-  })
   const {total_tax,
     total_income_tax,
     fed_income_tax,
     prov_income_tax,
     cpp,
     ei } = useSelector(({plot_params}) => {return plot_params.display_options})
+  
+    let display_options = {total_tax,
+    total_income_tax,
+    fed_income_tax,
+    prov_income_tax,
+    cpp,
+    ei }
 
   // Anytime a plot parameter is changed, update plot options state
   useEffect(() => {
+    console.log('First useEffect plot_Data')
     plot_data()
-  },[income, prov, year, use_ratio, enable_plot, year2, prov2, chart_key])
+  },[income, prov, year, use_ratio, year2, prov2])
+
+  useEffect(() => {
+    console.log('Second useEffect change chart visuals')
+    chart_data.change_chart_visuals(enable_plot, display_options)
+    set_options(Object.create(chart_data.options))
+    })
 
   console.log(' Beginning of PlotRecords')
 
@@ -52,23 +69,55 @@ function _PlotRecords({ years, provinces, set_options}){
     dispatch(set_secondary_params({prov2:e.target.value}))
   }
   const plot_data = ( ) => {
-    let display_options = {total_tax,
-    total_income_tax,
-    fed_income_tax,
-    prov_income_tax,
-    cpp,
-    ei }
-
-    set_options(load_primary_chart_data(enable_plot, use_ratio, year, 
-      income, prov, year2, prov2, display_options))
+    load_primary_chart_data(enable_plot, use_ratio, year, 
+      income, prov, year2, prov2)
+    set_options(Object.create(chart_data.options))
   }
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
-    <div> 
-      <FirstRecord years={years} provinces={provinces}/>
-      <SecondRecord years={years} provinces={provinces}/>
+    <div className="plot_records"> 
+      <Income />
+      <div className="plot_param_container">
+        <div className="plot_params">
+          <FirstRecord years={years} provinces={provinces}/>
+        </div>
+        <div className="plot_params">
+          <SecondRecord years={years} provinces={provinces} set_options={set_options}/>
+        </div>
+      </div>
       <DisplayOptions />
-      {/*
+    </div>
+  )
+}
+
+const PlotRecords = memo(_PlotRecords)
+export default PlotRecords
+
+      /*
+      <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <Tab label="First Plot" value="1" />
+            <Tab label="Second Plot" value="2" />
+            <Tab label="Options" value="3" />
+          </TabList>
+        </Box>
+        <TabPanel value="1">
+          <FirstRecord years={years} provinces={provinces}/>
+        </TabPanel>
+        <TabPanel value="2">
+          <SecondRecord years={years} provinces={provinces} set_options={set_options}/>
+        </TabPanel>
+        <TabPanel value="3">
+          <DisplayOptions />
+        </TabPanel>
+      </TabContext>
+      */
+
+      /*
       <form onSubmit={handleSubmit}>
         <label>
           Percentage:
@@ -79,10 +128,4 @@ function _PlotRecords({ years, provinces, set_options}){
           />
         </label>
       </form>
-    */}
-    </div>
-  )
-}
-
-const PlotRecords = memo(_PlotRecords)
-export default PlotRecords
+    */

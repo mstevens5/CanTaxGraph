@@ -4,6 +4,10 @@ import { set_primary_params,
   set_secondary_params, 
   set_use_ratio, 
   set_enable_second_plot} from '../reducers/plot_params'
+import chart_data from '../charts/data'
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import {FormGroup, FormControlLabel, Switch} from '@mui/material'
 
 const SecondRecord = ({years, provinces}) => {
   const dispatch = useDispatch()
@@ -14,6 +18,7 @@ const SecondRecord = ({years, provinces}) => {
   const enable_plot = useSelector(({plot_params}) => {
     return plot_params.enable_second_plot
   })
+
   const handleSubmit = (event) => {
     event.preventDefault()
   }
@@ -27,26 +32,42 @@ const SecondRecord = ({years, provinces}) => {
     dispatch(set_enable_second_plot(e.target.checked))
   }
 
+  console.log('Inside Second Record')
   return (
-    <div> 
+    <div > 
+        <div className="plot_param_title"> Secondary Plot</div>
+          <hr className="title_rule"/>
+          <div className="plot_param_title_description">
+            These will be displayed as dotted lines in the chart</div>
+          <br />
       <form onSubmit={handleSubmit}>
-        <fieldset >
-          <legend> Second Plot</legend>
-          <select className='plot_option' onChange={change_year2} value={year2}>
-            {years.map((year) => <option key={year}>{year}</option>)}
-          </select>
-          <select className='plot_option' onChange={change_prov2} value={prov2}>
-            {provinces.map((prov) => <option key={prov}>{prov}</option>)}
-          </select>
-          <label>
-            Enable:
+          <span className="plot_param_label" >Year:</span> 
+          <Select size="small" onChange={change_year2} value={year2}>
+            {years.map((year) => <MenuItem key={year} value={year}>{year}</MenuItem>)}
+          </Select>
+          <br />
+          <br />
+          <span className="plot_param_label" >Province:</span> 
+          <Select size="small" onChange={change_prov2} value={prov2}>
+            {provinces.map((prov) => <MenuItem key={prov} value={prov}>{prov}</MenuItem>)}
+          </Select>
+          <br />
+          <br />
+            <span className="plot_param_label" >Enable:</span> 
+            <Switch checked={enable_plot} onChange={change_enable_plot}/>
+          {/*
+            <FormGroup>
+              <FormControlLabel control={<Switch checked={enable_plot} 
+                onChange={change_enable_plot}/>} label="Enable" />
+            </FormGroup>
+            */}
+            {/*
             <input
               type="checkbox"
               checked={enable_plot}
               onChange={change_enable_plot}
             />
-          </label>
-        </fieldset>
+            */}
       </form>
     </div>
   )

@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
+import { v4 as uuidv4 } from 'uuid'
 
 const initial_params = {
   chart_key: "truetruetruetruetruetrue",
@@ -37,25 +38,29 @@ const plot_params_slice = createSlice({
       Object.keys(action.payload)
         .filter(key => key in state.primary)
         .forEach((key) => state.primary[key] = action.payload[key])
+      state.chart_key = set_chart_key()
     },
     set_secondary_params(state, action){
       console.log('====== action222.payload', action.payload)
       Object.keys(action.payload)
         .filter(key => key in state.secondary)
         .forEach((key) => state.secondary[key] = action.payload[key])
+      state.chart_key = set_chart_key()
     },
     set_use_ratio(state, action){
       state.use_ratio = action.payload
+      state.chart_key = set_chart_key()
     },
     set_enable_second_plot(state, action){
       state.enable_second_plot = action.payload
+      state.chart_key = set_chart_key()
     },
     set_display_options(state, action){
       console.log('====== action.payload', action.payload)
       Object.keys(action.payload)
         .filter(key => key in state.display_options)
         .forEach((key) => state.display_options[key] = action.payload[key])
-      state.chart_key = set_chart_key(state.display_options)
+      state.chart_key = set_chart_key()
       console.log(' . state is ', state.chart_key)
     }
     /*
@@ -93,15 +98,9 @@ const plot_params_slice = createSlice({
   }
 })
 
-const set_chart_key = (display_options) => {
-  let d = display_options
-  let key = d.total_tax + '' +
-    d.total_income_tax + '' + 
-    d.fed_income_tax + '' +
-    d.prov_income_tax + '' +
-    d.cpp + '' +
-    d.ei;
-  return key
+const set_chart_key = () => {
+  console.log('SET CHART KEYYYY')
+  return uuidv4()
 }
 
 export const {

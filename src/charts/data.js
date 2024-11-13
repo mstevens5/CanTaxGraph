@@ -10,13 +10,58 @@ let colors = ["#000000", //black
   "red"
 ] // darkcyan 
 
+const get_content_formatter = (unit) =>{
+  return function(e){
+    var content = "";
 
+    e.entries.sort(function(a,b) {
+      return b.dataPoint.y - a.dataPoint.y;
+    });
+
+    content += "<div style=\"text-align: center\">";
+    content += "<h3 style=\"margin: 0\">"
+    content	+= "<span style=\"font-weight: bold\"> Income: $" + e.entries[0].dataPoint.x.toLocaleString() + "</span>";
+    content += "<br/>";
+    content += "</h3>"
+    content += "</div>";
+    content += "<hr>"
+
+    var entries = e.entries;
+    for(var j = 0; j < entries.length; j++) {
+      content	+= "<div style=\"text-align:left\">";
+      content	+= "<span style=\"color:" + entries[j].dataSeries.color+"\"\>" + entries[j].dataSeries.name + " </span>: " + "<strong>" 
+      if (unit == "$"){
+        content += unit + Number(entries[j].dataPoint.y.toFixed(2)).toLocaleString()
+      }
+      else {
+        content += Number(entries[j].dataPoint.y.toFixed(2)).toLocaleString() + unit
+      }
+      content += "</strong>";
+      content += "<br/></div>"; 
+    } 
+    return content;
+
+  }
+}
+
+const get_y_label_formatter = (unit) => {
+  return function(e){
+    if (unit == "$"){
+      return unit + e.value.toLocaleString()
+    }
+    else{
+      return e.value.toLocaleString() + unit
+    }
+  }
+}
 // This object is designed to be passed to CanvasJSChart component. It contains
 // everything needed for displaying the plots we construct in our app.
 const options = {
   theme: 'light2',
   toolTip: {
     shared: true,
+    contentFormatter: get_content_formatter(unit_m),
+    /*
     contentFormatter: function (e) {
       var content = "";
 
@@ -47,7 +92,7 @@ const options = {
       } 
       return content;
 
-    }
+    }*/
   },
   animationEnabled: false,
   title: {
@@ -63,14 +108,15 @@ const options = {
     interlacedColor: "#f8f8f8",
     title: "Tax Amount",
     minimum: 0,
-    labelFormatter: function(e){
+    labelFormatter: get_y_label_formatter(unit_m)
+    /*labelFormatter: function(e){
       if (unit_m == "$"){
         return unit_m + e.value.toLocaleString()
       }
       else{
         return e.value.toLocaleString() + unit_m
       }
-    },
+    },*/
     //valueFormatString:"'$'0"
   },
   axisX : {
@@ -298,10 +344,8 @@ const set_visibility = (display_options, enable) => {
       options.data[6].visible = true
   }
   if (!display_options.total_tax){
-    console.log('Did were get here?????')
     options.data[0].visible = false
     options.data[6].visible = false
-    console.log('hhhhhhhhhhh', options)
   }
 
   if (display_options.total_income_tax){
@@ -353,19 +397,45 @@ const set_visibility = (display_options, enable) => {
     options.data[5].visible = false
     options.data[11].visible = false
   }
-  console.log('sadlkfjasl;dkfjas;dlfj;asdlf', options)
+}
+
+const change_chart_visuals = (enable, display_options) => {
+  let disp = [display_options.total_tax,
+    display_options.total_income_tax,
+    display_options.fed_income_tax,
+    display_options.prov_income_tax,
+    display_options.cpp,
+    display_options.ei]
+
+  for (let i = 0; i < disp.length; i++){
+    options.data[i].visible = disp[i]
+  }
+
+  for (let i = 6; i < options.data.length; i++){
+    let visibility
+    if (!enable){
+      visibility = false
+    }
+    else{
+      visibility = disp[i - disp.length]
+    }
+    options.data[i].visible = visibility
+  }
 }
 
 const load_primary_chart_data = (enable_plot, use_ratio, year, income, prov, 
-  year2, prov2, display_options) => {
+  year2, prov2) => {
 
+  /*
   let options
+  */
   if (use_ratio){
-    options = new_options("%")
+    options.toolTip.contentFormatter = get_content_formatter("%")
+    options.axisY.labelFormatter = get_y_label_formatter("%")
   } else {
-    options = new_options("$")
-    
-  } 
+    options.toolTip.contentFormatter = get_content_formatter("$")
+    options.axisY.labelFormatter = get_y_label_formatter("$")
+  }
 
   let x_axis_interval = Math.round(income / 10)
   if (x_axis_interval == 0){
@@ -424,7 +494,7 @@ const load_primary_chart_data = (enable_plot, use_ratio, year, income, prov,
     options.data[i].visible = visibility
   }
 
-  set_visibility(display_options, enable_plot)
+  //set_visibility(display_options, enable_plot)
 
   // This is a hack while use_ratio is enabled and x = 0. Change y to 0.
   for (let i = 0; i < options.data.length; i++){
@@ -433,8 +503,8 @@ const load_primary_chart_data = (enable_plot, use_ratio, year, income, prov,
     }
   }
 
-  return options
+  //return options
 }
 
 export {load_primary_chart_data}
-export default {new_options, set_visibility}
+export default {new_options, set_visibility, change_chart_visuals, options}
