@@ -38,7 +38,7 @@ test('testing calc_fed_ei', () => {
     0, 1500, 20000, 45879, 56300, 80000
   ]
   let expected = [
-    0, 23.7, 316, 724.89, 889.54, 889.54
+    0, 20.15, 268.6, 616.15, 756.11, 756.11
   ]
   for (let i = 0; i < incomes.length; i++){
     console.log(`Testing year 2021, income: ${incomes[i]}`)
@@ -54,7 +54,7 @@ test('testing calc_fed_ei', () => {
     0, 1500, 20000, 45879, 63200, 80000
   ]
   expected = [
-    0, 24.9, 332, 761.59, 1049.12, 1049.12
+    0, 21.17, 282.2, 647.35, 891.75, 891.75
   ]
   for (let i = 0; i < incomes.length; i++){
     console.log(`Testing year 2024, income: ${incomes[i]}`)
@@ -70,7 +70,7 @@ test('testing calc_fed_cpp', () => {
     3500, 1500, 0, 4000, 10000, 15789, 40000, 62789, 66600, 80000
   ]
   let expected = [
-    0, 0, 0, 29.75, 386.75, 731.20, 2171.75, 3527.70, 3754.45, 3754.45
+    0, 0, 0, 25.29, 328.74, 621.52, 1845.99, 2998.54, 3191.28, 3191.28
   ]
   for (let i = 0; i < incomes.length; i++){
     console.log(`Testing year 2023, income: ${incomes[i]}`)
@@ -86,7 +86,7 @@ test('testing calc_fed_cpp', () => {
     3500, 1500, 0, 4000, 10000, 15789, 40000, 61400, 64900, 80000
   ]
   expected = [
-    0, 0, 0, 28.5, 370.5, 700.47, 2080.5, 3300.3, 3499.8, 3499.8 
+    0, 0, 0, 24.23, 314.93, 595.40, 1768.43, 2805.26, 2974.83, 2974.83
   ]
   for (let i = 0; i < incomes.length; i++){
     console.log(`Testing year 2022, income: ${incomes[i]}`)

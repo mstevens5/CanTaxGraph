@@ -297,8 +297,15 @@ const calc_fed_cpp = (year, income) => {
 
   let contrib = income * (cpp_info['rate'] / 100)
   if (contrib > cpp_info.max_contrib){
-    return cpp_info.max_contrib
+    contrib = cpp_info.max_contrib
   }
+
+  let rate = fed[year]['rates']
+  rate = rate[0].rate / 100
+  let tax_credit = contrib * rate
+  contrib = contrib - tax_credit
+  contrib = (contrib > 0 ) ? contrib : 0
+
   return round_to(contrib, 2)
 }
 
@@ -316,7 +323,18 @@ const calc_fed_ei = (year, income) => {
   const rate = fed[year]['ei'].rate
   const max_premium = fed[year]['ei'].max_premium
   let premium = income * (rate / 100)
-  return premium < max_premium ? round_to(premium, 2) : round_to(max_premium, 2)
+  premium = (premium < max_premium) ? premium : max_premium
+  
+  // Calculated tax credit
+  let fed_rate = fed[year]['rates']
+  fed_rate = fed_rate[0].rate / 100
+  let tax_credit = premium * fed_rate
+
+  // Apply tax credit to premium
+  premium = premium - tax_credit
+  premium = (premium > 0 ) ? premium : 0
+  
+  return round_to(premium, 2)
 }
 
 export default {
