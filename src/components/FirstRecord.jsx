@@ -6,6 +6,13 @@ import { set_primary_params,
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import {FormControl, OutlinedInput} from '@mui/material'
+import {Accordion, 
+  AccordionSummary,
+  AccordionDetails,
+  Typography
+} from '@mui/material'
+
+import ArrowDownwardIcon from "../img/arrow_downward_icon.png"
 
 const FirstRecord = ({years, provinces}) => {
   const dispatch = useDispatch()
@@ -38,29 +45,43 @@ const FirstRecord = ({years, provinces}) => {
 
   return (
     <div > 
-      <form onSubmit={handleSubmit}>
-        {/*
-          <label>
-            Max Income:
-            <br />
-            <input className="plot_option" value={income}
-              onChange={change_income} />
-          </label>
-        */}
-        <div className="plot_param_title"> Primary Plot</div>
-          <hr className="title_rule"/>
-          <br />
-          <span className="plot_param_label">Tax Year:</span> 
-          <Select size="small" onChange={change_year} value={year} >
-            {years.map((year) => <MenuItem key={year} value={year}>{year}</MenuItem>)}
-          </Select>
-          <br />
-          <br />
-          <span className="plot_param_label">Province:</span> 
-          <Select size="small" onChange={change_prov} value={prov} >
-            {provinces.map((prov) => <MenuItem key={prov} value={prov}>{prov}</MenuItem>)}
-          </Select>
-      </form>
+      <Accordion sx={{boxShadow:0}} defaultExpanded>
+        <AccordionSummary
+          expandIcon={<img src={ArrowDownwardIcon} width="24rem" height="24rem"/>}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          <Typography component={'span'} sx={{width:'100%'}}>
+            <div className="plot_param_title"> Primary Plot</div>
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography component={'span'} >
+            <form onSubmit={handleSubmit}>
+              {/*
+                <label>
+                  Max Income:
+                  <br />
+                  <input className="plot_option" value={income}
+                    onChange={change_income} />
+                </label>
+              */}
+                <hr className="title_rule"/>
+                <br />
+                <span className="plot_param_label">Tax Year:</span> 
+                <Select size="small" onChange={change_year} value={year} >
+                  {years.map((year) => <MenuItem key={year} value={year}>{year}</MenuItem>)}
+                </Select>
+                <br />
+                <br />
+                <span className="plot_param_label">Province:</span> 
+                <Select size="small" onChange={change_prov} value={prov} >
+                  {provinces.map((prov) => <MenuItem key={prov} value={prov}>{prov}</MenuItem>)}
+                </Select>
+            </form>
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
     </div>
   )
 }

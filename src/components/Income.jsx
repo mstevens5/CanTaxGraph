@@ -6,6 +6,13 @@ import { set_primary_params,
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import {Tooltip, FormControl, OutlinedInput, TextField} from '@mui/material'
+import {Accordion, 
+  AccordionSummary,
+  AccordionDetails,
+  Typography
+} from '@mui/material'
+
+import ArrowDownwardIcon from "../img/arrow_downward_icon.png"
 import icon from "../img/icons8-info-32.png"
 
 const Income = () => {
@@ -33,30 +40,44 @@ const Income = () => {
 
   return (
     <div className="income_outline"> 
-    <h2> Income </h2>
-      <form onSubmit={handleSubmit}>
-          <label>
-            Max Income:
-            <span style={{paddingRight:'15px'}}>
-            <Tooltip
-              title="This is the maximum income plotted on the graph"
-              enterTouchDelay={0}
-              slotProps={{
-                tooltip:{
-                  sx:{
-                    fontStyle: 'bold',
-                    fontSize: '0.75rem'
-                  }
-                }
-              }}
-              >
-              <img src={icon} width="24" height="24"/>
-            </Tooltip>
-            </span>
-            <TextField variant="outlined" size="small" value={income}
-              onChange={change_income} />
-          </label>
-      </form>
+      <Accordion sx={{boxShadow:0}} defaultExpanded>
+        <AccordionSummary
+          expandIcon={<img src={ArrowDownwardIcon} width="24rem" height="24rem"/>}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          <Typography component={'span'} sx={{width:'100%'}}>
+            <div className="income_title">Income</div>
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography component={'span'} >
+            <form onSubmit={handleSubmit}>
+              <label>
+                Max Income:
+                <span style={{paddingRight:'15px'}}>
+                <Tooltip
+                  title="This is the maximum income plotted on the graph"
+                  enterTouchDelay={0}
+                  slotProps={{
+                    tooltip:{
+                      sx:{
+                        fontStyle: 'bold',
+                        fontSize: '0.75rem'
+                      }
+                    }
+                  }}
+                  >
+                  <img src={icon} width="24rem" height="24rem"/>
+                </Tooltip>
+                </span>
+                <TextField variant="outlined" size="small" value={income}
+                  onChange={change_income} />
+              </label>
+            </form>
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
     </div>
   )
 }

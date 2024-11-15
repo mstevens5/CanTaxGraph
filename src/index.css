@@ -1,14 +1,27 @@
 body{
-    font-family:Roboto;
+    font-family:"Roboto";
     background-color: #e0e0e0;
+    -webkit-font-smoothing: antialiased;
+    font-weight:300;
 }
-
+b, strong {
+    font-weight: 700;
+}
 .income_outline{
-    box-shadow: 10px 10px 40px #00000033;
+    box-shadow: 10px 10px 40px #00000011;
     border-radius:10px;
     padding:1rem;
     text-align:center; 
     background-color: white;
+}
+.income_title{
+    min-width:100%;
+    font-weight:900;
+    background: linear-gradient(45deg, #f69ec4, #f9dd94);
+    border-radius:10px;
+    text-align:center; 
+    font-size:1.5rem;
+    letter-spacing:0.1rem;
 }
 
 /* Title and Description*/
@@ -44,7 +57,7 @@ body{
     /*border: 2px solid #bbbbbb;*/
     margin-left:auto;
     margin-right:auto;
-    margin-bottom:50px;
+    margin-bottom:25px;
    /* padding:40px;*/
    /* display:grid*/
 }
@@ -83,7 +96,7 @@ body{
     }
 }
 .plot_params{
-    box-shadow: 10px 10px 40px #00000033;
+    box-shadow: 10px 10px 40px #00000011;
     border-radius:10px;
     padding:1rem;
     background-color: white;
@@ -106,10 +119,21 @@ body{
     padding-right:10px;
 }
 .plot_param_title{
+    /*
     font-size:1.25rem;
     text-align:center;
     color:#111111;
     font-weight:900;
+    */
+    margin-top:1rem;
+    margin-bottom:1rem;
+    min-width:100%;
+    font-weight:900;
+    background: linear-gradient(45deg, #f69ec4, #f9dd94);
+    border-radius:10px;
+    text-align:center; 
+    font-size:1.5rem;
+    letter-spacing:0.1rem;
 }
 .plot_param_title_description{
     color:#484848;
@@ -118,7 +142,7 @@ body{
 }
 
 .display_options_outline{
-    box-shadow: 10px 10px 40px #00000033;
+    box-shadow: 10px 10px 40px #00000011;
     border-radius:10px;
     padding:1rem;
     background-color: white;
@@ -134,10 +158,21 @@ body{
     white-space: nowrap;
 }
 .display_options_title{
+    /*
     font-size:1.25rem;
     text-align:center;
     color:#111111;
     font-weight:900;
+    */
+    margin-top:1rem;
+    margin-bottom:1rem;
+    min-width:100%;
+    font-weight:900;
+    background: linear-gradient(45deg, #f69ec4, #f9dd94);
+    border-radius:10px;
+    text-align:center; 
+    font-size:1.5rem;
+    letter-spacing:0.1rem;
 }
 .ratio_description{
     color:#484848;
@@ -148,18 +183,16 @@ body{
 .plot{
     box-shadow: 10px 10px 40px #00000011;
     border: 1px solid black;
+    margin-bottom:3rem;
 }
-
 .calculation_description_outline{
     /*border: 2px solid #bbbbbb;*/
     margin-left:auto;
     margin-right:auto;
-    margin-bottom:50px;
-    margin-top:50px;
-    box-shadow: 10px 10px 40px #00000033;
-    border-radius:10px;
-    padding:1rem;
-    background-color: white;
+    margin-bottom:25px;
+    margin-top:25px;
+   /* padding:40px;*/
+   /* display:grid*/
 }
 @media only screen and (min-width: 800px) {
     .calculation_description_outline{
@@ -173,6 +206,81 @@ body{
         width:100%;
     }
 }
+.calculation_description_container{
+    box-shadow: 10px 10px 40px #00000011;
+    border-radius:10px;
+    padding:2rem;
+    padding-left:3rem;
+    padding-right:3rem;
+    background-color: white;
+}
+.calculation_description_title{
+    font-weight:900;
+    background: linear-gradient(45deg, #f69ec4, #f9dd94);
+    border-radius:10px;
+    border-radius:10px;
+    font-size:1.5rem;
+    padding-left:2rem;
+    padding-top:0.25rem;
+    padding-bottom:0.25rem;
+    letter-spacing:0.2rem;
+}
+/*
+.calculation_description_outline{
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:50px;
+    margin-top:50px;
+    box-shadow: 10px 10px 40px #00000033;
+    border-radius:10px;
+    padding:1rem;
+    background-color: white;
+    border: 1px solid black;
+}
+@media only screen and (min-width: 800px) {
+    .calculation_description_outline{
+        width:80%;
+        max-width: 1000px;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .calculation_description_outline{
+        max-width:100%;
+        width:100%;
+    }
+}
+*/
+
+ul {
+    display: block;
+    margin-left: -10px;
+}
+
+ul li {
+    display: block;
+    position: relative;
+}
+
+ul li:not(:last-child) {
+    margin-bottom: 16px;
+}
+
+ul li:before {
+    content: "";
+    position: absolute;
+    top: 1.2em;
+    left: -30px;
+    margin-top: -.9em;
+    /*background: #f69ec4;*/
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #f69ec4, #f9dd94);
+}
+
+
+
+
 
 
 

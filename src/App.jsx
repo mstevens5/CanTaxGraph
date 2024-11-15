@@ -57,16 +57,22 @@ function App() {
           More than a calculator, Canadian Tax Graph displays basic tax 
           information in an easy to view and compare line chart.
         </div>
+        <br/>
+        <div>
+          The purpose of this tool is to show taxes owed for single tax payers
+          under the age of 65 who earn their income from employment rather than 
+          capital gains, dividends, etc
+        </div>
         <hr className="title_rule"/>
+      </div>
+      <div className="plot">
+        {console.log('plots before', options)}
+        <CanvasJSChart options={options} />
       </div>
       <PlotRecords years={years} 
         provinces={provinces}
         set_options = {setOptions}
         />
-      <div className="plot">
-        {console.log('plots before', options)}
-        <CanvasJSChart options={options} />
-      </div>
       <CalculationDescription/>
     </div>
   );

@@ -8,6 +8,13 @@ import chart_data from '../charts/data'
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import {FormGroup, FormControlLabel, Switch} from '@mui/material'
+import {Accordion, 
+  AccordionSummary,
+  AccordionDetails,
+  Typography
+} from '@mui/material'
+
+import ArrowDownwardIcon from "../img/arrow_downward_icon.png"
 
 const SecondRecord = ({years, provinces}) => {
   const dispatch = useDispatch()
@@ -35,13 +42,24 @@ const SecondRecord = ({years, provinces}) => {
   console.log('Inside Second Record')
   return (
     <div > 
-        <div className="plot_param_title"> Secondary Plot</div>
+      <Accordion sx={{boxShadow:0}} defaultExpanded>
+        <AccordionSummary
+          expandIcon={<img src={ArrowDownwardIcon} width="24rem" height="24rem"/>}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          <Typography component={'span'} sx={{width:'100%'}}>
+            <div className="plot_param_title"> Secondary Plot</div>
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography component={'span'} >
           <hr className="title_rule"/>
           <div className="plot_param_title_description">
             These will be displayed as dotted lines in the chart</div>
           <br />
       <form onSubmit={handleSubmit}>
-          <span className="plot_param_label" >Year:</span> 
+          <span className="plot_param_label" >Tax Year:</span> 
           <Select size="small" onChange={change_year2} value={year2}>
             {years.map((year) => <MenuItem key={year} value={year}>{year}</MenuItem>)}
           </Select>
@@ -69,6 +87,9 @@ const SecondRecord = ({years, provinces}) => {
             />
             */}
       </form>
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
     </div>
   )
 }

@@ -20,6 +20,13 @@ import {List,
   FormControl, 
   InputBase,
   Tooltip} from '@mui/material';
+import {Accordion, 
+  AccordionSummary,
+  AccordionDetails,
+  Typography
+} from '@mui/material'
+
+import ArrowDownwardIcon from "../img/arrow_downward_icon.png"
 
 const DisplayOptions = () => {
   const dispatch = useDispatch()
@@ -79,6 +86,13 @@ const DisplayOptions = () => {
   let val = ["one","Two"]
    return (
     <div className="display_options_outline">
+      <Accordion sx={{boxShadow:0}} defaultExpanded>
+        <AccordionSummary
+          expandIcon={<img src={ArrowDownwardIcon} width="24rem" height="24rem"/>}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          <Typography component={'span'} sx={{width:'100%'}}>
       <div className="display_options_title">Display Options
           <span style={{paddingRight:'15px'}}>
           <Tooltip
@@ -97,6 +111,10 @@ const DisplayOptions = () => {
           </Tooltip>
           </span>
       </div>
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography component={'span'} >
         <hr className="title_rule"/>
       <div className="display_options_container">
       {/*<FormControl sx={{ m: 1, width: 200 }}>*/}
@@ -143,9 +161,22 @@ const DisplayOptions = () => {
           />
           </div>
         </div>
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
         {/*<FormControl sx={{ m: 1, width: 200 }}>*/}
-        <br />
+      <Accordion sx={{boxShadow:0}} defaultExpanded>
+        <AccordionSummary
+          expandIcon={<img src={ArrowDownwardIcon} width="24rem" height="24rem"/>}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          <Typography component={'span'} sx={{width:'100%'}}>
         <div className="display_options_title">General Options</div>
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography component={'span'} >
         <hr className="title_rule"/>
           <FormControlLabel
           margin="none"
@@ -156,6 +187,9 @@ const DisplayOptions = () => {
         <span className="ratio_description">
             ** Display taxes as a percentage of total income
         </span>
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
       </div>
    ) 
 }
