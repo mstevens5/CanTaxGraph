@@ -12,7 +12,9 @@ import {Accordion,
   Typography
 } from '@mui/material'
 
+import { get_fed_details } from '../taxes/init';
 import ArrowDownwardIcon from "../img/arrow_downward_icon.png"
+import { fed_data as fed, prov_data } from "../taxes/init"
 
 const FirstRecord = ({years, provinces}) => {
   const dispatch = useDispatch()
@@ -43,8 +45,39 @@ const FirstRecord = ({years, provinces}) => {
     dispatch(set_primary_params({prov:e.target.value}))
   }
 
+  const fed_details = get_fed_details(year)
+
   return (
-    <div > 
+    <div className="plot_params"> 
+            <div className="plot_param_title"> Primary Plot</div>
+            <div className="plot_param_container">
+              <div className="plot_param_item">
+                <form onSubmit={handleSubmit}>
+                  <span className="plot_param_label">Tax Year:</span> 
+                  <Select size="small" onChange={change_year} value={year} >
+                    {years.map((year) => <MenuItem key={year} value={year}>{year}</MenuItem>)}
+                  </Select>
+                </form>
+              </div>
+              <div className="plot_param_item">
+                <form onSubmit={handleSubmit}>
+                <span className="plot_param_label">Province:</span> 
+                  <Select size="small" onChange={change_prov} value={prov} >
+                    {provinces.map((prov) => <MenuItem key={prov} value={prov}>{prov}</MenuItem>)}
+                  </Select>
+                </form>
+              </div>
+            </div>
+    </div>
+  )
+}
+
+export default FirstRecord
+
+
+
+/*
+    <div> 
       <Accordion sx={{boxShadow:0}} defaultExpanded>
         <AccordionSummary
           expandIcon={<img src={ArrowDownwardIcon} width="24rem" height="24rem"/>}
@@ -58,32 +91,79 @@ const FirstRecord = ({years, provinces}) => {
         <AccordionDetails>
           <Typography component={'span'} >
             <form onSubmit={handleSubmit}>
-              {/*
-                <label>
-                  Max Income:
-                  <br />
-                  <input className="plot_option" value={income}
-                    onChange={change_income} />
-                </label>
-              */}
-                <hr className="title_rule"/>
-                <br />
-                <span className="plot_param_label">Tax Year:</span> 
-                <Select size="small" onChange={change_year} value={year} >
-                  {years.map((year) => <MenuItem key={year} value={year}>{year}</MenuItem>)}
-                </Select>
-                <br />
-                <br />
-                <span className="plot_param_label">Province:</span> 
-                <Select size="small" onChange={change_prov} value={prov} >
-                  {provinces.map((prov) => <MenuItem key={prov} value={prov}>{prov}</MenuItem>)}
-                </Select>
+              <div className="plot_param_container">
+                <div className="plot_param_item">
+                  <span className="plot_param_label">Tax Year:</span> 
+                  <Select size="small" onChange={change_year} value={year} >
+                    {years.map((year) => <MenuItem key={year} value={year}>{year}</MenuItem>)}
+                  </Select>
+                </div>
+                <div className="plot_param_item">
+                  <span className="plot_param_label">Province:</span> 
+                  <Select size="small" onChange={change_prov} value={prov} >
+                    {provinces.map((prov) => <MenuItem key={prov} value={prov}>{prov}</MenuItem>)}
+                  </Select>
+                </div>
+              </div>
             </form>
+
+            <div style={{fontWeight:900}}>
+              <ul>
+                <li>
+                  Show Year/Province Details
+                </li>
+              </ul>
+            </div>
+            
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<img src={ArrowDownwardIcon} width="24rem" height="24rem"/>}
+                aria-controls="panel2-content"
+                id="panel2-header"
+              >
+                <Typography component={'span'}>
+                  <div> EI</div>
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography component={'span'} >
+                  <div>
+                      Rate: {fed_details.ei.rate}
+                  </div>
+                  <div>
+                      Maximum Premium: {fed_details.ei.max_premium}
+                  </div>
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+
+
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<img src={ArrowDownwardIcon} width="24rem" height="24rem"/>}
+                aria-controls="panel3-content"
+                id="panel3-header"
+              >
+                <Typography component={'span'}>
+                  <div> CPP</div>
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography component={'span'} >
+                  <div>
+                      Rate: {fed_details.cpp.rate}
+                  </div>
+                  <div>
+                      Exemption: {fed_details.cpp.exemption}
+                  </div>
+                  <div>
+                      Max Contributions: {fed_details.cpp.max_contrib}
+                  </div>
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
           </Typography>
         </AccordionDetails>
       </Accordion>
     </div>
-  )
-}
-
-export default FirstRecord
+    */

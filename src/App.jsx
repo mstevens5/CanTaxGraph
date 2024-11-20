@@ -73,6 +73,7 @@ function App() {
         provinces={provinces}
         set_options = {setOptions}
         />
+      <hr/>
       <CalculationDescription/>
     </div>
   );

@@ -97,6 +97,8 @@ const options = {
   animationEnabled: false,
   title: {
     text: 'Individual Taxes Owed',
+    maxWidth: 800,
+    fontSize: 16,
   },
   axisY : {
     crosshair: {
@@ -194,7 +196,7 @@ const options = {
     {
       type: 'line',
       //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
-      name: "Federal Income Tax",
+      name: "Fed. Income Tax",
       lineDashType: "solid",
       showInLegend: true,
       color: colors[2],
@@ -209,7 +211,7 @@ const options = {
     {
       type: 'line',
       //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
-      name: "Provincial Income Tax",
+      name: "Prov. Income Tax",
       lineDashType: "solid",
       showInLegend: true,
       color: colors[3],
@@ -250,7 +252,7 @@ const options = {
     {
       type: 'line',
       //toolTipContent: "{x}: {y} <span style='\"'color: {color}; font-weight: bold;'\";'>{name} </span>",
-      name: "Total Tax 2",
+      name: "Total Tax (Secondary)",
       lineDashType: "dot",
       showInLegend: false,
       visible: false,
@@ -263,7 +265,7 @@ const options = {
     {
       type: 'line',
       //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
-      name: "Total Income Tax 2",
+      name: "Total Income Tax (Secondary)",
       lineDashType: "dot",
       showInLegend: false,
       color: colors[1],
@@ -277,7 +279,7 @@ const options = {
     {
       type: 'line',
       //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
-      name: "Federal Income Tax 2",
+      name: "Fed. Income Tax (Secondary)",
       lineDashType: "dot",
       showInLegend: false,
       color: colors[2],
@@ -291,7 +293,7 @@ const options = {
     {
       type: 'line',
       //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
-      name: "Provincial Income Tax 2",
+      name: "Prov. Income Tax (Secondary)",
       lineDashType: "dot",
       showInLegend: false,
       color: colors[3],
@@ -305,7 +307,7 @@ const options = {
     {
       type: 'line',
       //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
-      name: "CPP Contributions 2",
+      name: "CPP Contributions (Secondary)",
       lineDashType: "dot",
       showInLegend: false,
       color: colors[4],
@@ -319,7 +321,7 @@ const options = {
     {
       type: 'line',
       //toolTipContent: "{x}: {y}" +unit_m + "<span style='\"'color: {color}; font-weight: bold;'\";'> {name} </span>",
-      name: "Ei Premium 2",
+      name: "Ei Premium (Secondary)",
       lineDashType: "dot",
       showInLegend: false,
       markerType: "circle",
@@ -423,6 +425,26 @@ const change_chart_visuals = (enable, display_options) => {
   }
 }
 
+const update_title = (year, prov, year2, prov2, enable) => {
+  options.title.text = `[Primary Year: ${year}, Prov.: ${prov}] `
+  if (enable){
+    options.title.text += `- [Secondary Year: ${year2}, Prov.: ${prov2}]`
+  }
+  options.data[0].name = `Total Tax (${year}, ${prov})`
+  options.data[1].name = `Total Income Tax (${year}, ${prov})`
+  options.data[2].name = `Fed. Income Tax (${year}, ${prov})`
+  options.data[3].name = `Prov. Income Tax (${year}, ${prov})`
+  options.data[4].name = `CPP Contributions (${year}, ${prov})`
+  options.data[5].name = `EI Premiums (${year}, ${prov})`
+  options.data[6].name = `Total Tax (${year2}, ${prov2})`
+  options.data[7].name = `Total Income Tax (${year2}, ${prov2})`
+  options.data[8].name = `Fed. Income Tax (${year2}, ${prov2})`
+  options.data[9].name = `Prov. Income Tax (${year2}, ${prov2})`
+  options.data[10].name = `CPP Contributions (${year2}, ${prov2})`
+  options.data[11].name = `EI Premiums (${year2}, ${prov2})`
+
+}
+
 const load_primary_chart_data = (enable_plot, use_ratio, year, income, prov, 
   year2, prov2) => {
 
@@ -507,4 +529,5 @@ const load_primary_chart_data = (enable_plot, use_ratio, year, income, prov,
 }
 
 export {load_primary_chart_data}
-export default {new_options, set_visibility, change_chart_visuals, options}
+export default {new_options, set_visibility, 
+  update_title, change_chart_visuals, options}

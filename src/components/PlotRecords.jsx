@@ -37,7 +37,7 @@ function _PlotRecords({ years, provinces, set_options}){
     cpp,
     ei } = useSelector(({plot_params}) => {return plot_params.display_options})
   
-    let display_options = {total_tax,
+  let display_options = {total_tax,
     total_income_tax,
     fed_income_tax,
     prov_income_tax,
@@ -53,6 +53,7 @@ function _PlotRecords({ years, provinces, set_options}){
   useEffect(() => {
     console.log('Second useEffect change chart visuals')
     chart_data.change_chart_visuals(enable_plot, display_options)
+    chart_data.update_title(year, prov, year2, prov2, enable_plot)
     set_options(Object.create(chart_data.options))
     })
 
@@ -79,16 +80,17 @@ function _PlotRecords({ years, provinces, set_options}){
 
   return (
     <div className="plot_records"> 
-      <Income />
-      <div className="plot_param_container">
-        <div className="plot_params">
-          <FirstRecord years={years} provinces={provinces}/>
-        </div>
-        <div className="plot_params">
-          <SecondRecord years={years} provinces={provinces} set_options={set_options}/>
-        </div>
+
+      <div className="income_outline"> 
+        <Income />
       </div>
-      <DisplayOptions />
+      <FirstRecord years={years} provinces={provinces}/>
+      <div className="plot_params">
+        <SecondRecord years={years} provinces={provinces} set_options={set_options}/>
+      </div>
+      <div className="display_options_outline">
+        <DisplayOptions />
+      </div>
     </div>
   )
 }

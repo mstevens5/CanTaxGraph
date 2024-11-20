@@ -3,25 +3,16 @@ body{
     background-color: #e0e0e0;
     -webkit-font-smoothing: antialiased;
     font-weight:300;
+    box-sizing: border-box;
+}
+@media only screen and (min-width:1400px){
+    body{
+        max-width:1400px;
+        margin:auto;
+    }
 }
 b, strong {
     font-weight: 700;
-}
-.income_outline{
-    box-shadow: 10px 10px 40px #00000011;
-    border-radius:10px;
-    padding:1rem;
-    text-align:center; 
-    background-color: white;
-}
-.income_title{
-    min-width:100%;
-    font-weight:900;
-    background: linear-gradient(45deg, #f69ec4, #f9dd94);
-    border-radius:10px;
-    text-align:center; 
-    font-size:1.5rem;
-    letter-spacing:0.1rem;
 }
 
 /* Title and Description*/
@@ -48,69 +39,103 @@ b, strong {
     border-top: 1px solid #cccccc;
 }
 
+.plot{
+    width:100%;
+    border: 1px solid black;
+    margin-bottom:1rem;
+    box-shadow: 10px 10px 40px #000000bb;
+}
+
 .select {
     height:2rem;
     margin-bottom:1rem;
 }
 
 .plot_records{
-    /*border: 2px solid #bbbbbb;*/
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom:25px;
-   /* padding:40px;*/
-   /* display:grid*/
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width:95%;
+    margin-left: auto;
+    margin-right: auto;
 }
-@media only screen and (min-width: 800px) {
-    .plot_records{
-        width:80%;
-        max-width: 1000px;
-    }
-}
-@media only screen and (max-width: 800px) {
-    .plot_records{
-        max-width:100%;
-        width:100%;
-    }
-}
-.plot_param_container{
-    display:flex;
-    flex-wrap: nowrap;
-    margin-top:20px;
-    margin-bottom:20px;
-    align-items: stretch;
-}
-@media only screen and (min-width: 600px) {
-    .plot_param_container{
-        /*grid-template-columns: 1fr 1fr;*/
-        flex-direction: row;
-        justify-content:space-around;
-        align-items: stretch;
-    }
-}
-@media only screen and (max-width: 600px) {
-    .plot_param_container{
-        /*grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;*/
-        flex-direction: column
-    }
-}
-.plot_params{
-    box-shadow: 10px 10px 40px #00000011;
-    border-radius:10px;
-    padding:1rem;
-    background-color: white;
 
+.income_outline{
+    border: 1px solid black;
+    /*border-radius:10px;*/
+    /*padding:0.5rem;*/
+    margin:0.25rem;
+    background-color: white;
+    flex-shrink:1;
+    flex-grow:1;
+    display:flex;
+    flex-flow: column nowrap;
+    box-shadow: 10px 10px 40px #000000bb;
 }
-@media only screen and (min-width: 600px){
-    .plot_params {
-        width:45%;
+@media only screen and (min-width: 500px) {
+    .income_outline{
+        max-width:45%;
     }
 }
-@media only screen and (max-width: 600px){
-    .plot_params {
-        width:90%;
-        margin:5px;
+@media only screen and (min-width: 1000px) {
+    .income_outline{
+        max-width:25%;
+    }
+}
+.income_title{
+    width:auto;
+    font-weight:900;
+    background: linear-gradient(45deg, #f69ec4, #f9dd94);
+    /*border-radius:10px;*/
+    /*border-top-left-radius:10px;
+    border-top-right-radius:10px;*/
+    border-bottom: 1px solid black;
+    text-align:center; 
+    font-size:1.25rem;
+    letter-spacing:0.1rem;
+    /*margin-top:0.5rem;*/
+    margin:0px;
+    margin-bottom:1rem;
+    padding:1rem;
+    white-space:nowrap;
+}
+.income_container{
+    display:flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.income_item{
+    padding-top:1rem;
+    padding-left:1rem;
+    padding-right:1rem;
+    padding-bottom:0rem;
+    flex-shrink:1;
+    flex-grow:1;
+}
+
+.plot_params{
+    border: 1px solid black;
+    /*border-radius:10px;*/
+    /*padding:0.5rem;*/
+    margin:0.25rem;
+    text-align:center; 
+    background-color: white;
+    flex-shrink:1;
+    flex-grow:1;
+    /*display:flex;
+    flex-flow: column nowrap;*/
+    box-shadow: 10px 10px 40px #000000bb;
+}
+@media only screen and (min-width: 500px) {
+    .plot_params{
+        max-width:45%;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .plot_params{
+        max-width:25%;
     }
 }
 .plot_param_label{
@@ -119,6 +144,198 @@ b, strong {
     padding-right:10px;
 }
 .plot_param_title{
+    width:auto;
+    font-weight:900;
+    background: linear-gradient(45deg, #f69ec4, #f9dd94);
+    /*border-radius:10px;*/
+    /*border-top-left-radius:10px;
+    border-top-right-radius:10px;*/
+    border-bottom: 1px solid black;
+    text-align:center; 
+    font-size:1.25rem;
+    letter-spacing:0.1rem;
+    /*margin-top:0.5rem;*/
+    margin:0px;
+    margin-bottom:1rem;
+    padding:1rem;
+    white-space:nowrap;
+}
+.plot_param_container{
+    display:flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.plot_param_item{
+    padding-top:1rem;
+    padding-left:1rem;
+    padding-right:1rem;
+    padding-bottom:0rem;
+    flex-shrink:1;
+    flex-grow:1;
+    white-space: nowrap;
+}
+
+.display_options_outline{
+    border: 1px solid black;
+    /*border-radius:10px;*/
+    /*padding:0.5rem;*/
+    margin:0.25rem;
+    text-align:center; 
+    background-color: white;
+    flex-shrink:1;
+    flex-grow:1;
+    display:flex;
+    flex-flow: column nowrap;
+    box-shadow: 10px 10px 40px #000000bb;
+}
+@media only screen and (min-width: 500px) {
+    .display_options_outline{
+        max-width:45%;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .display_options_outline{
+        max-width:25%;
+    }
+}
+.display_options_title{
+    width:auto;
+    font-weight:900;
+    background: linear-gradient(45deg, #f69ec4, #f9dd94);
+    /*border-radius:10px;*/
+    /*border-top-left-radius:10px;
+    border-top-right-radius:10px;*/
+    border-bottom: 1px solid black;
+    text-align:center; 
+    font-size:1.25rem;
+    letter-spacing:0.1rem;
+    /*margin-top:0.5rem;*/
+    margin:0px;
+    margin-bottom:1rem;
+    padding:1rem;
+    white-space:nowrap;
+}
+.display_options_container{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.line_display_option{
+    /*flex-basis:33%;*/
+    flex-shrink:0;
+    white-space: nowrap;
+}
+
+
+
+
+.plot_recordsssss{
+    /*border: 2px solid #bbbbbb;*/
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:25px;
+   /* padding:40px;*/
+   /* display:grid*/
+}
+@media only screen and (min-width: 600px) {
+    .plot_recordss{
+        width:80%;
+        max-width: 1000px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .plot_recordss{
+        max-width:100%;
+        width:100%;
+    }
+}
+
+.income_outlineeee{
+    box-shadow: 10px 10px 40px #00000011;
+    border: 1px solid black;
+    border-radius:10px;
+    padding:1rem;
+    text-align:center; 
+    background-color: white;
+}
+.income_titleeeee{
+    min-width:100%;
+    font-weight:900;
+    background: linear-gradient(45deg, #f69ec4, #f9dd94);
+    border-radius:10px;
+    text-align:center; 
+    font-size:1.5rem;
+    letter-spacing:0.1rem;
+}
+
+/***** NOT IN USE ******/
+.plot_param_containerrrr{
+    display:flex;
+    flex-wrap: nowrap;
+    margin-top:20px;
+    margin-bottom:20px;
+    align-items: stretch;
+}
+@media only screen and (min-width: 600px) {
+    .plot_param_containerrrr{
+        /*grid-template-columns: 1fr 1fr;*/
+        flex-direction: row;
+        justify-content:space-around;
+        align-items: stretch;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .plot_param_containerrrr{
+        /*grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;*/
+        flex-direction: column
+    }
+}
+/*********** END NOT IN USE *********/
+
+.plot_paramssss{
+    box-shadow: 10px 10px 40px #00000011;
+    border: 1px solid black;
+    border-radius:10px;
+    padding:1rem;
+    margin-top:1rem;
+    background-color: white;
+}
+.plot_param_containerrrr{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-evenly;
+}
+.plot_param_itemmmm{
+    flex-shrink:0;
+    white-space: nowrap;
+}
+
+/***** NOT IN USE ***************/
+@media only screen and (min-width: 600px){u
+    .plot_paramsss {
+       /* width:45%;*/
+    }
+}
+@media only screen and (max-width: 600px){
+    .plot_paramsss {
+        /*width:90%;
+        margin:5px;*/:width: ;
+    }
+}
+/***** END NOT IN USE *****/
+
+.plot_param_labellll{
+    font-size:1rem;
+    font-weight:bolder;
+    padding-right:10px;
+}
+.plot_param_titleee{
     /*
     font-size:1.25rem;
     text-align:center;
@@ -126,7 +343,7 @@ b, strong {
     font-weight:900;
     */
     margin-top:1rem;
-    margin-bottom:1rem;
+    margin-bottom:0rem;
     min-width:100%;
     font-weight:900;
     background: linear-gradient(45deg, #f69ec4, #f9dd94);
@@ -139,25 +356,28 @@ b, strong {
     color:#484848;
     font-style:italic;
     font-size:0.9rem;
+    text-align:center;
+    margin:auto;
 }
 
-.display_options_outline{
+.display_options_outlineeee{
     box-shadow: 10px 10px 40px #00000011;
     border-radius:10px;
     padding:1rem;
+    margin-top:1rem;
     background-color: white;
 }
-.display_options_container{
+.display_options_containerrrr{
     display:flex;
     flex-wrap: wrap;
     flex-direction: row;
 }
-.line_display_option{
+.line_display_optionnn{
     flex-basis:33%;
     flex-shrink:0;
     white-space: nowrap;
 }
-.display_options_title{
+.display_options_titleeeee{
     /*
     font-size:1.25rem;
     text-align:center;
@@ -180,11 +400,6 @@ b, strong {
     font-size:0.9rem;
 }
 
-.plot{
-    box-shadow: 10px 10px 40px #00000011;
-    border: 1px solid black;
-    margin-bottom:3rem;
-}
 .calculation_description_outline{
     /*border: 2px solid #bbbbbb;*/
     margin-left:auto;

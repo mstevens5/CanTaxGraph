@@ -132,6 +132,20 @@ test('testing calc_fed_bpa_credit()', () => {
     .toThrow(calc.errors.income_less_than_zero)
 })
 
+test('testing _calc_fed_employment_credit()', () => {
+  let years = [
+    '2013', '2014', '2015', '2016', '2017', '2018', 
+    '2019', '2020', '2021', '2022', '2023', '2024'
+  ]
+  let expected = [167.55, 169.05, 171.9, 174.15, 
+    176.7, 179.25, 183.3, 186.75, 188.55, 193.05, 205.2, 214.95
+  ]
+  for (let i = 0; i < years.length; i++){
+    console.log(`Testing year: ${years[i]}`)
+    expect(calc._calc_fed_employment_credit(years[i])).toBe(expected[i])
+  }
+})
+
 test('testing calc_prov_bpa_credit() for AB', () => {
   // YEAR 2014: ********
   let incomes = [

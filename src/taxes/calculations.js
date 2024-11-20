@@ -202,6 +202,12 @@ const calc_fed_income_tax = (year, income) => {
   return _calc_basic_income_tax(fed[year]['rates'], income)
 }
 
+const _calc_fed_employment_credit = (year) => {
+  let emp_amount = fed[year]["employment_amount"]
+  let rate = fed[year]['rates'][0].rate / 100
+  return round_to(rate * emp_amount, 2)
+}
+
 /**
  * Calculate non-refundable tax credit from the basic personal amount. Here we
  * simply multiple personal amount by the tax rate of teh lowest tax bracket.
@@ -300,9 +306,12 @@ const calc_fed_cpp = (year, income) => {
     contrib = cpp_info.max_contrib
   }
 
+  // Calculate Tax Credit
   let rate = fed[year]['rates']
   rate = rate[0].rate / 100
   let tax_credit = contrib * rate
+
+  // Apply tax credit to contribution amount
   contrib = contrib - tax_credit
   contrib = (contrib > 0 ) ? contrib : 0
 
@@ -325,7 +334,7 @@ const calc_fed_ei = (year, income) => {
   let premium = income * (rate / 100)
   premium = (premium < max_premium) ? premium : max_premium
   
-  // Calculated tax credit
+  // Calculate tax credit
   let fed_rate = fed[year]['rates']
   fed_rate = fed_rate[0].rate / 100
   let tax_credit = premium * fed_rate
@@ -344,6 +353,7 @@ export default {
   calc_prov_bpa_credit,
   calc_fed_ei, 
   calc_fed_cpp,
+  _calc_fed_employment_credit,
   get_tax_data,
   round_to,
   errors
